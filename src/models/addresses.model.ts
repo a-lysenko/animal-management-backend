@@ -49,6 +49,10 @@ export class Addresses extends Entity {
   })
   zipcode?: string;
 
+  @property({
+    type: 'number',
+  })
+  owner_id?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

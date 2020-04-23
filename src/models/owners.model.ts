@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne} from '@loopback/repository';
+import {Addresses} from './addresses.model';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'public', table: 'owners'}}
@@ -21,6 +22,8 @@ export class Owners extends Entity {
   })
   fullname: string;
 
+  @hasOne(() => Addresses, {keyTo: 'owner_id'})
+  addresses: Addresses;
   // Define well-known properties here
 
   // Indexer property to allow additional data
