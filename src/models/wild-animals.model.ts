@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Animals} from './animals.model';
 
 @model({
   settings: {idInjection: false, postgresql: {schema: 'public', table: 'wild_animals'}}
@@ -29,6 +30,8 @@ export class WildAnimals extends Entity {
   })
   trackingid: number;
 
+  @belongsTo(() => Animals, {name: 'animals'})
+  animal_id: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
