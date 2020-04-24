@@ -2,7 +2,7 @@
   "name": "animalManagement",
   "connector": "postgresql",
   "url": "",
-  "host": "animal-mngmnt-db.ctgnqrfnpbca.eu-central-1.rds.amazonaws.com",
+  "host": "animalmngmntdb.ctgnqrfnpbca.eu-central-1.rds.amazonaws.com",
   "port": 5432,
   "user": "postgres",
   "password": "6TBTWWw0H0VZCs2UE2EU",

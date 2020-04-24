@@ -2,12 +2,15 @@ import {Entity, model, property, hasOne} from '@loopback/repository';
 import {Addresses} from './addresses.model';
 
 @model({
-  settings: {idInjection: false, postgresql: {schema: 'public', table: 'owners'}}
+  settings: {
+    idInjection: false,
+    postgresql: {schema: 'public', table: 'owners'},
+  }
 })
 export class Owners extends Entity {
   @property({
     type: 'number',
-    required: true,
+    required: false,
     scale: 0,
     id: 1,
     postgresql: {columnName: 'id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'NO'},
@@ -22,7 +25,35 @@ export class Owners extends Entity {
   })
   fullname: string;
 
-  @hasOne(() => Addresses, {keyTo: 'owner_id'})
+  @property({
+    type: 'string',
+    required: false,
+    length: 50
+  })
+  city: string;
+
+  @property({
+    type: 'string',
+    required: false,
+    length: 50
+  })
+  country: string;
+
+  @property({
+    type: 'string',
+    required: false,
+    length: 50
+  })
+  street: string;
+
+  @property({
+    type: 'string',
+    required: false,
+    length: 10
+  })
+  zipcode: string;
+
+  @hasOne(() => Addresses, {keyTo: 'ownerId'})
   addresses: Addresses;
   // Define well-known properties here
 

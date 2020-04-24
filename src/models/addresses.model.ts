@@ -6,7 +6,7 @@ import {Entity, model, property} from '@loopback/repository';
 export class Addresses extends Entity {
   @property({
     type: 'number',
-    required: true,
+    required: false,
     scale: 0,
     id: 1,
     postgresql: {columnName: 'id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'NO'},
@@ -49,10 +49,6 @@ export class Addresses extends Entity {
   })
   zipcode?: string;
 
-  @property({
-    type: 'number',
-  })
-  owner_id?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

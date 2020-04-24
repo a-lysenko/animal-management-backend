@@ -46,7 +46,17 @@ export class OwnerController {
     })
     owners: Omit<Owners, 'id'>,
   ): Promise<Owners> {
-    return this.ownersRepository.create(owners);
+    const createdOwner = await this.ownersRepository.create({fullname: owners.fullname});
+
+    await this.ownersRepository.addresses(createdOwner.id).create({
+      ownerId: createdOwner.id,
+      city: owners.city,
+      country: owners.country,
+      street: owners.street,
+      zipcode: owners.zipcode
+    });
+
+    return createdOwner;
   }
 
   @get('/owners', {
@@ -113,7 +123,14 @@ export class OwnerController {
     @param.path.number('id') id: number,
     @param.filter(Owners, {exclude: 'where'}) filter?: FilterExcludingWhere<Owners>
   ): Promise<Owners> {
-    return this.ownersRepository.findById(id, filter);
+    return this.ownersRepository.findById(id, {
+      fields: {
+        id: true,
+        fullname: true
+      },
+      include: [{relation: 'addresses'}],
+      ...filter
+    });
   }
 
   @patch('/owners/{id}', {
